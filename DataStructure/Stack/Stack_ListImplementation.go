@@ -3,7 +3,7 @@ package main
 import (
 	"container/list"
 	"errors"
-	"fmt"
+	"log"
 	"sync"
 )
 
@@ -30,7 +30,7 @@ func (c *stack) Front() {
 		c.lock.Lock()
 		defer c.lock.Unlock()
 		if val, ok := c.stackObj.Front().Value.(interface{}); ok {
-			fmt.Println("From Front element is : ", val)
+			log.Println("From Front element is : ", val)
 		}
 	}
 }
@@ -41,7 +41,7 @@ func (c *stack) Pop() error {
 		defer c.lock.Unlock()
 		ele := c.stackObj.Front()
 		c.stackObj.Remove(ele)
-		fmt.Println("Pop element: ", ele.Value)
+		log.Println("Pop element: ", ele.Value)
 		return nil
 	} else {
 		return errors.New("Stack is already empty")
@@ -57,24 +57,24 @@ func main() {
 	stackObj := &stack{
 		stackObj: list.New(),
 	}
-	fmt.Println("Push Operation.")
+	log.Println("Push Operation.")
 	stackObj.Push("A")
 	stackObj.Push("N")
 	stackObj.Push("!@##@")
 	stackObj.Push("12321")
 	stackObj.Push("12.321")
-	fmt.Println("Stack size :", stackObj.Size())
-	fmt.Println("Displaying stack elements. ")
+	log.Println("Stack size :", stackObj.Size())
+	log.Println("Displaying stack elements. ")
 	stackObj.Front()
-	fmt.Println("Pop operation begins.")
+	log.Println("Pop operation begins.")
 	err := stackObj.Pop()
 	if err != nil {
-		fmt.Println("Error in pop operation : ", err)
+		log.Println("Error in pop operation : ", err)
 	}
 
 }
 func panicHandler() {
 	if r := recover(); r != nil {
-		fmt.Println("Recovered: ", r)
+		log.Println("Recovered: ", r)
 	}
 }
