@@ -20,7 +20,6 @@ func sort(A []int) []int {
 	if len(A) <= 1 {
 		return A
 	}
-
 	left, right := split(A)
 	left = sort(left)
 	right = sort(right)
@@ -33,7 +32,7 @@ func split(A []int) ([]int, []int) {
 
 func merge(A, B []int) []int {
 	arr := make([]int, len(A)+len(B))
-
+	fmt.Println("Arr:", arr)
 	j, k := 0, 0
 
 	for i := 0; i < len(arr); i++ {
@@ -56,6 +55,5 @@ func merge(A, B []int) []int {
 			j++
 		}
 	}
-
 	return arr
 }
