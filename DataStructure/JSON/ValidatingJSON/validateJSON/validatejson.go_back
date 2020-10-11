@@ -1,0 +1,32 @@
+package main
+
+import (
+	"fmt"
+	"log"
+
+	schema "github.com/lestrrat-go/jsschema"
+	"github.com/lestrrat-go/jsschema/validator"
+)
+
+func main() {
+	s, err := schema.ReadFile("D:\\Golang\\GolangPrograms\\DataStructure\\JSON\\JSONTest\\json-ld.json")
+	if err != nil {
+		log.Printf("failed to read schema: %s", err)
+		return
+	}
+	fmt.Println("Length is : ", len(s.Properties))
+	for name, pdef := range s.Properties {
+		// Do what you will with `pdef`, which contain
+		// Schema information for `name` property
+		fmt.Println("Name : ", name, " |||| ", "  pdef: ", pdef)
+		_ = name
+		_ = pdef
+	}
+
+	// You can also validate an arbitrary piece of data
+	var p interface{} // initialize using json.Unmarshal...
+	v := validator.New(s)
+	if err := v.Validate(p); err != nil {
+		log.Printf("failed to validate data: %s", err)
+	}
+}
