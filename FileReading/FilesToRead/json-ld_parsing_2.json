@@ -1,0 +1,39 @@
+{
+
+    "@type" : "Person",
+   
+    "first name" : "Mark",
+   
+    "last name" : "Zuckerberg",
+   
+    "age" : {
+   
+             "value" : 32,
+   
+             "units" : "years"
+   
+            },
+   
+    "children" : []
+   
+   }
+   
+   {
+   
+    "@type" : "Person",
+   
+    "first name" : "Maxima",
+   
+    "last name" : "Zuckerberg",
+   
+    "age" : {
+   
+             "value" : 0,
+   
+             "units" : "years"
+   
+            }
+   
+   }
+   
+   
