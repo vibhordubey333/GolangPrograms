@@ -3,6 +3,7 @@ package main
 import (
 	"RPC_POC/common"
 	"io"
+	"log"
 	"net/http"
 	"net/rpc"
 )
@@ -27,6 +28,7 @@ func main() {
 	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
 		io.WriteString(res, "RPC Server Live")
 	})
+	log.Println("Server Started:")
 	//Listen and serve default HTTP server.
 	http.ListenAndServe(":9000", nil)
 }

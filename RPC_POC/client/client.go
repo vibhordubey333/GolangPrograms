@@ -3,10 +3,12 @@ package main
 import (
 	"RPC_POC/common"
 	"fmt"
+	"log"
 	"net/rpc"
 )
 
 func main() {
+	log.Println("Client started:")
 	//Get RPC client by dialing at rpc.DefaultRPCPath endpoint.
 	client, _ := rpc.DialHTTP("tcp", "127.0.0.1:9000") // or `localhost:9000`
 
