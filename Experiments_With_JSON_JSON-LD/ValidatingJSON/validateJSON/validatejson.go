@@ -7,6 +7,7 @@ import (
 	"github.com/lestrrat-go/jsval/builder"
 )
 
+//For validating JSON as well as JSON-LD schema.
 func main() {
 	s, err := schema.ReadFile("D:\\Golang\\GolangPrograms\\DataStructure\\JSON\\JSONTest\\json-ld.json")
 	if err != nil {
