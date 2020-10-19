@@ -1,4 +1,4 @@
-module Parsing_JSON-LD
+module Parsing_JSON-LD_GOLD_LIB
 
 go 1.15
 
