@@ -2,6 +2,7 @@ syntax="proto3";
 
 package main;
 
+// Read footer comment, to how to run.
 message SocialFollowers{
 	int32 youtube = 1 ;
 	int32 twitter = 2 ;
