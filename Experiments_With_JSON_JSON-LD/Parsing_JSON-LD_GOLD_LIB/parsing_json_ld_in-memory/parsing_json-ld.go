@@ -4,52 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"time"
 
-	jsonld "github.com/emersion/go-jsonld"
 	"github.com/piprate/json-gold/ld"
 )
 
 const (
 	LINE_BREAK = "************************************************************************************"
 )
-
-// ODRL OptiSAM-NG schema
-type person struct {
-	ID    string           `jsonld:"@id"`
-	Name  string           `jsonld:"name"`
-	URL   *jsonld.Resource `jsonld:"url"`
-	Image *jsonld.Resource `jsonld:"image"`
-}
-type policy struct {
-	ID         string `jsonld:"@id"`
-	Assigner   string
-	Assignee   string
-	Name       string    `jsonld:"name"`
-	ExpiryDate time.Time `jsonld:"name"`
-	Rules      []Rules   `jsonld:rules`
-	Constraint []Constraints
-
-	//	URL   *jsonld.Resource `jsonld:"url"`
-	//	Image *jsonld.Resource `jsonld:"image"`
-}
-type Rules struct {
-	Target     string
-	Type       string //Permission/Prohibition
-	Constraint []Constraints
-	Action     []Actions
-}
-
-type Constraints struct {
-	LeftOperand  string
-	RightOperand string //Confirm from ODRL
-	Operator     string
-}
-
-type Actions struct {
-	Actions    string
-	Constraint Constraints
-}
 
 func main() {
 

@@ -33,7 +33,7 @@ const jsonString = `{
 			  "value": 9.88
 			 }
 		}]
- }`
+ }`e
 
 /*
  const jsonString = `{
