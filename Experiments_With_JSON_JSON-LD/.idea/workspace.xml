@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="636b8101-49d1-48f2-ab8a-4ad4e01910b3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ParsingJSON_SOF/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/ParsingJSON_SOF/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parsing_JSON-LD/parsing_json-ld.go" beforeDir="false" afterPath="$PROJECT_DIR$/Parsing_JSON-LD/parsing_json-ld.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parsing_JSON-LD_GOLD_LIB/parsing_json-ld.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JSON_Test_Data/json-ld_parsing.json" beforeDir="false" afterPath="$PROJECT_DIR$/JSON_Test_Data/json-ld_parsing.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsing_JSON-LD_GOLD_LIB/parsing_json_ld_in-memory/parsing_json-ld.go" beforeDir="false" afterPath="$PROJECT_DIR$/Parsing_JSON-LD_GOLD_LIB/parsing_json_ld_in-memory/parsing_json-ld.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ProtoBuf_POC/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../ProtoBuf_POC/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ProtoBuf_POC/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../ProtoBuf_POC/go.sum" afterDir="false" />
     </list>
@@ -32,7 +32,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ng-backend" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -47,5 +47,11 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="740" y="280" key="FileChooserDialogImpl" timestamp="1603725812063">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1603725812063" />
   </component>
 </project>
