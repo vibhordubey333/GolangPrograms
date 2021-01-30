@@ -10,6 +10,7 @@ import (
 //For validating JSON as well as JSON-LD schema.
 func main() {
 
+	
 	s, err := schema.ReadFile("D:\\Golang\\GolangPrograms\\Experiments_With_JSON_JSON-LD\\JSON_Test_Data\\json-ld_parsing.json")
 	if err != nil {
 		log.Printf("failed to open schema: %s", err)

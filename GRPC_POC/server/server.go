@@ -2,12 +2,11 @@ package main
 
 import (
 	"GRPC_POC/chat"
-	chat "GRPC_POC/chat"
 	"fmt"
 	"log"
 	"net"
 	"time"
-
+	chat "GRPC_POC/chat"
 	"google.golang.org/grpc"
 )
 
