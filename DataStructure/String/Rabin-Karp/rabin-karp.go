@@ -51,7 +51,7 @@ func rabinKarp(str, srchStr string, prime uint) {
 			if strHash < 0 {
 				strHash = strHash + MAXCHAR
 			}
-			fmt.Println("strHash Again:", strHash)
+			//fmt.Println("strHash Again:", strHash)
 		}
 	}
 
