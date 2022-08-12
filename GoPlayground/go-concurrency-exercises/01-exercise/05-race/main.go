@@ -1,42 +1,39 @@
-package main
-
-import (
+//------------- Program With Race Condition ------------------------------
+/*package main
+import(
 	"fmt"
-	"math/rand"
-	"time"
+	"sync"
 )
 
-//TODO: identify the data race
-// fix the issue.
+func main() {
+	var wg sync.WaitGroup
+	wg.Add(5)
+	for i := 0; i < 5; i++ {
+		go func() {
+			fmt.Println(i) // Not the 'i' you are looking for.
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+}
+*/
+
+//------------ Program with Race Condition Fixed -------------------------
+
+package main
+import(
+	"fmt"
+	"sync"
+)
 
 func main() {
-	start := time.Now()
-	var t *time.Timer
-	t = time.AfterFunc(randomDuration(), func() {
-		fmt.Println(time.Now().Sub(start))
-		t.Reset(randomDuration())
-	})
-	time.Sleep(5 * time.Second)
+	var wg sync.WaitGroup
+	wg.Add(5)
+	for i := 0; i < 5; i++ {
+		go func(j int) {
+			fmt.Println(j) // Read local copy of loop counter.
+			wg.Done()
+		}(i)
+	}
+	wg.Wait()
 }
-
-func randomDuration() time.Duration {
-	return time.Duration(rand.Int63n(1e9))
-}
-
-//----------------------------------------------------
-// (main goroutine) -> t <- (time.AfterFunc goroutine)
-//----------------------------------------------------
-// (working condition)
-// main goroutine..
-// t = time.AfterFunc()  // returns a timer..
-
-// AfterFunc goroutine
-// t.Reset()        // timer reset
-//----------------------------------------------------
-// (race condition- random duration is very small)
-// AfterFunc goroutine
-// t.Reset() // t = nil
-
-// main goroutine..
-// t = time.AfterFunc()
-//----------------------------------------------------

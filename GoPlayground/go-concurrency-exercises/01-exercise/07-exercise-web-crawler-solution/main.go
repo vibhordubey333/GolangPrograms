@@ -54,7 +54,7 @@ func Crawl(url string, depth int) {
 func main() {
 	fetched = make(map[string]bool)
 	now := time.Now()
-	Crawl("http://andcloud.io", 2)
+	Crawl("https://youtube.com", 2)
 	fmt.Println("time taken:", time.Since(now))
 }
 

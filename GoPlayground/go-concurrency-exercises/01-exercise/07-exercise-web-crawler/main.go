@@ -2,13 +2,19 @@ package main
 
 import (
 	"fmt"
+	"golang.org/x/net/html"
 	"net/http"
 	"time"
-
-	"golang.org/x/net/html"
 )
 
 var fetched map[string]bool
+
+func main() {
+	fetched = make(map[string]bool)
+	now := time.Now()
+	Crawl("https://www.youtube.com", 1)
+	fmt.Println("time taken:", time.Since(now))
+}
 
 // Crawl uses findLinks to recursively crawl
 // pages starting with url, to a maximum of depth.
@@ -31,13 +37,6 @@ func Crawl(url string, depth int) {
 		}
 	}
 	return
-}
-
-func main() {
-	fetched = make(map[string]bool)
-	now := time.Now()
-	Crawl("http://andcloud.io", 2)
-	fmt.Println("time taken:", time.Since(now))
 }
 
 func findLinks(url string) ([]string, error) {
