@@ -51,4 +51,5 @@ func main() {
 	for n := range square(generator(2, 3)) {
 		fmt.Println("Output : ", n)
 	}
+
 }
