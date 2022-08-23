@@ -24,28 +24,45 @@ func slowHandler(w http.ResponseWriter, req *http.Request) {
 		log.Printf("Error: %s\n", err.Error())
 		return
 	}
+
 	fmt.Fprintln(w, "OK")
-	fmt.Printf("slowHandler took: %v\n", time.Since(start))
+	fmt.Printf("SlowHandler took: %v\n", time.Since(start))
+
 }
 
 func main() {
+	fmt.Println("Inside MAin")
 	var err error
 
-	connstr := "host=localhost port=5432 user=alice password=pa$$word  dbname=wonderland sslmode=disable"
+	connstr := "host=localhost port=5433 user=postgres password=postgres dbname=test sslmode=disable"
 
 	db, err = sql.Open("postgres", connstr)
 	if err != nil {
+		fmt.Println("Error in connection ")
 		log.Fatal(err)
 	}
-
 	if err = db.Ping(); err != nil {
 		log.Fatal(err)
 	}
+	/*
+		// HTTP Handler functions are unaware of these timeouts they run to completion consuming resources.
+		//Note: Start server with "time curl http://localhost:9999"
+		srv := http.Server{
+			Addr:         "localhost:9999",
+			WriteTimeout: 2 * time.Second,
+			Handler:      http.HandlerFunc(slowHandler),
+		}
+	*/
 
+	//If input handler runs for longer than it's limit then handler sends the client a "503 service unavailable" error
+	// and HTML message
+	//Note: Start server with "time curl -i http://localhost:9999"
+	//In Output we can see "503 Service Unavailable"
+	//
 	srv := http.Server{
-		Addr:         "localhost:8000",
+		Addr:         "localhost:9999",
 		WriteTimeout: 2 * time.Second,
-		Handler:      http.HandlerFunc(slowHandler),
+		Handler:      http.TimeoutHandler(http.HandlerFunc(slowHandler), 1*time.Second, "Timeout!\n"), //http.HandlerFunc()
 	}
 
 	if err := srv.ListenAndServe(); err != nil {
