@@ -1,21 +1,48 @@
+/*
+	Purpose of interface:
+	Interface allows us to encapsulate the logic within user defined data type.
+*/
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-// Metal - mass and volume information
 type Metal struct {
 	mass   float64
 	volume float64
 }
 
-// Density - return density of metal
+type Gas struct {
+	pressure      float64
+	temprature    float64
+	molecularMass float64
+}
+
+//Return density of metal.
 func (m *Metal) Density() float64 {
-	// density = mass/volume
 	return m.mass / m.volume
 }
 
-// IsDenser - compare density of two objects
-func IsDenser(a, b *Metal) bool {
+//Return density if gas.
+func (g *Gas) Density() float64 {
+	return (g.molecularMass * g.pressure) / (0.0821 * (g.temprature + 273))
+
+}
+
+/*
+	Here Dense interface is having Density() method which has been implemented by
+	Metal and Gas structs.
+*/
+type Dense interface {
+	Density() float64
+}
+
+/*
+	IsDenser() takes interface as an arguement. Based on the
+	passed object it calls respective Density() method to compute .
+*/
+func IsDenser(a, b Dense) bool {
 	return a.Density() > b.Density()
 }
 
@@ -25,8 +52,28 @@ func main() {
 
 	result := IsDenser(&gold, &silver)
 	if result {
-		fmt.Println("gold has higher density than silver")
+		fmt.Println("Gold has higher density than silver.")
 	} else {
-		fmt.Println("silver has higher density than gold")
+		fmt.Println("Silver has higher density than gold.")
+	}
+
+	oxygen := Gas{
+		pressure:      5,
+		temprature:    27,
+		molecularMass: 32,
+	}
+
+	hydrogen := Gas{
+		pressure:      1,
+		temprature:    0,
+		molecularMass: 2,
+	}
+
+	result = IsDenser(&oxygen, &hydrogen)
+
+	if result {
+		fmt.Println("Oxygen has higher density than hydrogen")
+	} else {
+		fmt.Println("Hygrogen has higher density than oxygen")
 	}
 }

@@ -39,6 +39,12 @@ func (r rectangle) area() float64 {
 	return r.h * r.w
 }
 
+
+//Created interface Shape which instantiates area() as it is the common method.
+type shape interface{
+	area() float64
+}
+
 func (t triangle) angles() []float64 {
 	return []float64{angle(t.b, t.c, t.a), angle(t.a, t.c, t.b), angle(t.a, t.b, t.c)}
 }
@@ -52,5 +58,28 @@ func angle(a, b, c float64) float64 {
 // print angles of the triangle
 
 func main() {
-
+shapes := []shape{
+	circle{5},
+	triangle{10,4,7},
+	rectangle{
+		h: 5,
+		w: 10,
+	},
 }
+for _,v := range shapes{
+	fmt.Println(v," Area: ",v.area())
+	//Calling triangle only.
+	tObject,ok := v.(triangle)
+	if ok {
+		fmt.Println("Triangle",tObject.angles())
+	}
+}
+}
+
+//Output
+/*
+Circle (Radius: 5)  Area:  78.53981633974483
+Triangle (Sides: 10, 4, 7)  Area:  10.928746497197197
+Triangle [128.68218745348943 18.194872338766785 33.12294020774379]
+Rectangle (Sides: 5, 10)  Area:  50
+*/

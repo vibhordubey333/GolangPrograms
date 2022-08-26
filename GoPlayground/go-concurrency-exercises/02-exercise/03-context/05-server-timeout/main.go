@@ -1,25 +1,26 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
+	_ "github.com/lib/pq"
 	"log"
 	"net/http"
 	"time"
-
-	_ "github.com/lib/pq"
 )
 
 var db *sql.DB
 
-func slowQuery() error {
-	_, err := db.Exec("SELECT pg_sleep(5)")
+func slowQuery(ctx context.Context) error {
+	//_, err := db.Exec("SELECT pg_sleep(5)")
+	_, err := db.ExecContext(ctx, "SELECT pg_sleep(5)")
 	return err
 }
 
 func slowHandler(w http.ResponseWriter, req *http.Request) {
 	start := time.Now()
-	err := slowQuery()
+	err := slowQuery(req.Context()) // Propogating the timeout awareness down the call graph.
 	if err != nil {
 		log.Printf("Error: %s\n", err.Error())
 		return
@@ -34,15 +35,21 @@ func main() {
 	fmt.Println("Inside MAin")
 	var err error
 
-	connstr := "host=localhost port=5433 user=postgres password=postgres dbname=test sslmode=disable"
+	connstr := "host=0.0.0.0 port=5433 user=postgres password=postgres dbname=test sslmode=disable"
 
 	db, err = sql.Open("postgres", connstr)
 	if err != nil {
 		fmt.Println("Error in connection ")
 		log.Fatal(err)
 	}
-	if err = db.Ping(); err != nil {
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	//if err = db.Ping(); err != nil {
+	if err = db.PingContext(ctx); err != nil {
 		log.Fatal(err)
+
 	}
 	/*
 		// HTTP Handler functions are unaware of these timeouts they run to completion consuming resources.
