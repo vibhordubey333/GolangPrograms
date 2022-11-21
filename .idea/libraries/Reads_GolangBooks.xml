@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Reads_GolangBooks">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Reads_GolangBooks/golang-web-dev-master.zip!/" />
+      <root url="jar://$PROJECT_DIR$/Reads_GolangBooks/GolangTraining-master.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
