@@ -1,5 +1,3 @@
-// You can edit this code!
-// Click here and start typing.
 package main
 
 import (
@@ -8,7 +6,8 @@ import (
 )
 
 var (
-	wg sync.WaitGroup
+	wgProducer sync.WaitGroup
+	wgConsumer sync.WaitGroup
 	// It supports various types of datatypes
 	data []interface{} = []interface{}{"It's a general syntax", struct{}{}, 3343.2, "test1", "test2", 344, 343, 223}
 )
@@ -19,16 +18,16 @@ type Config struct {
 }
 
 func main() {
-	//Configurable 
+	//Configurable
 	configObject := &Config{
-		producerCount: 1,
+		producerCount: 34,
 		consumerCount: 10,
 	}
 
 	ch := make(chan interface{})
 
-	wg.Add(configObject.producerCount)
-	wg.Add(configObject.consumerCount)
+	wgProducer.Add(configObject.producerCount)
+	wgConsumer.Add(configObject.consumerCount)
 
 	for i := 0; i < configObject.producerCount; i++ {
 		go producer(ch)
@@ -38,17 +37,17 @@ func main() {
 		go consumer(ch)
 	}
 
-	wg.Wait()
+	wgProducer.Wait()
+	close(ch) //**************** Instead of closing in producer() function close here as otherwise we'll get error with consumer() function.
+	wgConsumer.Wait()
 }
 
 func producer(ch chan interface{}) {
-	defer close(ch)
-	//dataObject := new(Data)
 	for _, value := range data {
 		fmt.Println("Producing item : ", value)
 		ch <- value
 	}
-	wg.Done()
+	wgProducer.Done()
 }
 
 func consumer(ch chan interface{}) {
@@ -64,8 +63,9 @@ func consumer(ch chan interface{}) {
 			fmt.Println("Consuming Int Type. Item: ", v)
 		}
 	}
-	wg.Done()
+	wgConsumer.Done()
 }
+
 /*
 -------Output-----------
 Producing item :  It's a general syntax
