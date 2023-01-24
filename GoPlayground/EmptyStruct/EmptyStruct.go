@@ -16,19 +16,18 @@ F. Go has no Set object. Bit can be easily realized as a map[keyType]struct{}. T
 /*
 //****** Without using empty struct{} 
 func main() {
-    done := make(chan bool, 1)
+	boolCh := make(chan bool)
+	fmt.Println("Task Launched:")
+	go printHelloWorld(boolCh)
 
-    go func() {
-        // simulate long running task
-        time.Sleep(4 * time.Second)
-        done <- true
-        fmt.Println("long running task is done")
-    }()
+	<-boolCh
+	fmt.Println("Main GoRoutine Is Closing.")
+}
 
-    <-done
-    close(done)
-
-    fmt.Printf("whole program is done.")
+func printHelloWorld(boolCh chan bool) {
+	fmt.Println("In Progress Please Wait.")
+	time.Sleep(5 * time.Second)
+	boolCh <- true
 }
 */
 
