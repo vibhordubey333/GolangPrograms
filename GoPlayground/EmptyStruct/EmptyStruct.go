@@ -8,7 +8,7 @@ the slice but not them itself. The same story with channels.
 D. Very useful in channels when you notify about some event but you don’t need to pass any information about it, only a fact. Best solution is to pass an empty 
 structure because it will only increment a counter in the channel but not assign memory, copy elements and so on. Sometime people use Boolean values for this purpose, 
 but it’s much worse.
-E. Zero size container for methods. You may want have a mock for testing interfaces. Often you don’t need data on it, just methods with predefined input and 		output.
+E. Zero size container for methods. You may want have a mock for testing interfaces. Often you don’t need data on it, just methods with predefined input and output.
 F. Go has no Set object. Bit can be easily realized as a map[keyType]struct{}. This way map keeps only keys and no values.
 */
 //I usually use it where I would have used a channel of booleans. ie, instead of;
