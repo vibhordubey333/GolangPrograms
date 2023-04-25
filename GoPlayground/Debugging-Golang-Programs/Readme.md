@@ -6,7 +6,29 @@
 5. To list function arguments. Fire up `args`
 6. To print local variables `locals`.
 7. To jump to next line `next`.
-
+8. To go step by step `step`
+9. When breaking point is hit. Type `s` to take interrupt to function where breakpoint is applied.  
+```
+breakpoint hit during step
+[c] continue [s] stop here and cancel step, [f] finish step skipping all breakpoints? c
+continuing...
+> main.main() c:/users/t0285117/go/src/other-projects/golangprograms/goplayground/debugging-golang-programs/producer-consumer-generic-configurable-approach.go:32 (PC: 0xf39cab)
+    27:         ch := make(chan interface{})
+    28:
+    29:         wgProducer.Add(configObject.producerCount)
+    30:         wgConsumer.Add(configObject.consumerCount)
+    31:
+=>  32:         for i := 0; i < configObject.producerCount; i++ {
+    33:                 go producer(ch)
+    34:         }
+    35:
+    36:         for i := 0; i < configObject.consumerCount; i++ {
+    37:                 go consumer(ch)
+(dlv) step
+> main.main() c:/users/t0285117/go/src/other-projects/golangprograms/goplayground/debugging-golang-programs/producer-consumer-generic-configurable-approach.go:33 (PC: 0xf39c4b)
+```
+10. To Skip the breakpoint `continue`
+11. 
 ##### Straight From Man Pages
 
 ```
