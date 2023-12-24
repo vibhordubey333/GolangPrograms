@@ -8,6 +8,9 @@ import (
 	"sync"
 )
 
+/*
+Fan In is used when a single function reads from multiple inputs and proceeds until all are closed. This is made possible by multiplexing the input into a single channel.
+*/
 func readData(file string) <-chan string {
 	f, err := os.Open(file) //opens the file for reading
 	if err != nil {
