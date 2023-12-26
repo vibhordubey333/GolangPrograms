@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/signal"
 	"sync"
 	"time"
 )
@@ -27,7 +29,7 @@ func (p *Player) Hit() {
 }
 
 // Game simulates the ping-pong game.
-func Game(player1, player2 *Player, maxHits int) {
+func Game(player1, player2 *Player, maxHits int, interrupt <-chan os.Signal) {
 	var wg sync.WaitGroup
 	ball := &Ball{}
 
@@ -39,16 +41,30 @@ func Game(player1, player2 *Player, maxHits int) {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < maxHits; i++ {
-			time.Sleep(time.Millisecond * 100)
-			player1.Hit()
+			select {
+			case <-interrupt:
+				fmt.Println("Game interrupted!")
+				//return
+				os.Exit(0)
+			default:
+				time.Sleep(time.Millisecond * 100)
+				player1.Hit()
+			}
 		}
 	}()
 
 	go func() {
 		defer wg.Done()
 		for i := 0; i < maxHits; i++ {
-			time.Sleep(time.Millisecond * 100)
-			player2.Hit()
+			select {
+			case <-interrupt:
+				fmt.Println("Game interrupted!")
+				//return
+				os.Exit(0)
+			default:
+				time.Sleep(time.Millisecond * 100)
+				player2.Hit()
+			}
 		}
 	}()
 
@@ -69,6 +85,10 @@ func main() {
 	player1 := &Player{name: "Player 1"}
 	player2 := &Player{name: "Player 2"}
 
+	// Channel to receive interrupt signals
+	interrupt := make(chan os.Signal, 1)
+	signal.Notify(interrupt, os.Interrupt)
+
 	// Simulate the game with a maximum of 10 hits
-	Game(player1, player2, 1)
+	Game(player1, player2, 10, interrupt)
 }
