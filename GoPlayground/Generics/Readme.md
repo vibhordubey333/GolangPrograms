@@ -12,6 +12,9 @@ Inside the function parentheses (a, b T), we define the input parameters a and b
 
 To gain a clearer understanding of each component of the Golang generics syntax, refer to the accompanying image that breaks down each element visually.
 
+![image](https://github.com/vibhordubey333/GolangPrograms/assets/22407855/b26ae0c9-d057-4d4b-b1b7-97054ea1be64)
+
+
 ---
 Reference:
 
